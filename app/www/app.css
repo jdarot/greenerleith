@@ -1,0 +1,133 @@
+/* app.css: CSS styling for panels, plus a necessary workaround 
+
+MIT License
+(c) 2016 Jeremy Darot
+jeremy@greenerleith.org
+
+*/
+
+@import url(http://fonts.googleapis.com/css?family=Roboto:300,400,700);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,700);
+
+body, label, input, button, select {  
+font-family: 'Roboto', sans-serif;
+font-weight: 300;
+font-size: 13px
+}
+
+.leaflet-popup { 
+font-family: 'Roboto', sans-serif;
+font-weight: 300;
+font-size: 13px
+}
+
+h1, h2, h3, h4 { font-weight: 700; font-size: 13px }
+
+.control-label { font-weight: 700; font-size: 13px }
+
+/* The following div is required in order for the map to have height = 100% */
+.outer { 
+position: fixed; 
+top: 0; 
+left: 0; 
+right: 0; 
+bottom: 0; 
+overflow: hidden; 
+padding: 0; 
+} 
+
+#panel_air_plot { 
+background-color: white; 
+padding: 0 0 0 0;
+border-radius: 8px;
+cursor: move; 
+opacity: 1.00;
+z-index: 100;
+width: auto; 
+} 
+
+#panel_gps_plot { 
+background-color: white; 
+padding: 0 0 0 0;
+border-radius: 8px;
+cursor: move; 
+opacity: 1.00;
+z-index: 100;
+width: auto; 
+box-shadow: 6px 6px 5px #888888;
+/* can be used to have auto width, provided no width is specified in absolutePanel()*/
+} 
+
+.controls_autowidth { 
+background-color: white; 
+padding: 0 10px 0 10px; 
+border-radius: 8px;
+cursor: move;
+width: auto;
+/* Fade out while not hovering */ 
+opacity: 0.50;  
+transition: opacity, box-shadow 500ms;
+} 
+
+.controls_autowidth:hover { 
+/* Fade in while hovering */ 
+z-index: 200;
+opacity: 1; 
+transition-delay: 0.20s; 
+box-shadow: 6px 6px 5px #888888;
+}
+
+.controls { 
+background-color: white; 
+padding: 0 10px 0 10px; 
+border-radius: 8px;
+cursor: move; 
+/* Fade out while not hovering */ 
+opacity: 0.50;  
+transition: opacity, box-shadow 500ms;
+} 
+
+.controls:hover { 
+/* Fade in while hovering */ 
+z-index: 200;
+opacity: 1; 
+transition-delay: 0.20s; 
+box-shadow: 6px 6px 5px #888888;
+}
+
+#background_controls { 
+background-color: white; 
+padding: 5px 10px 0 10px; 
+border-radius: 8px;
+cursor: move; 
+/* Fade out while not hovering */ 
+opacity: 0.50;  
+transition: opacity, box-shadow 500ms;
+} 
+
+#background_controls:hover { 
+/* Fade in while hovering */ 
+z-index: 200;
+opacity: 1; 
+transition-delay: 0.20s;
+box-shadow: 6px 6px 5px #888888;
+}
+
+#credits { 
+background-color: white;
+padding: 10px 10px 10px 10px; 
+opacity: 0.70;  
+z-index: 1;
+transition: opacity 500ms; 
+} 
+
+#credits:hover { 
+/* Fade in while hovering */ 
+z-index: 200;
+opacity: 1; 
+transition-delay: 0.25s; 
+}
+
+.fb-share-button, .twitter-share-button {
+    vertical-align: top;
+}
