@@ -1,6 +1,6 @@
 ## server_authentication.R: user authentication using an external MongoDB database (details in private/server_global_authentication)
 
-## MIT License
+## GNU General Public License version 2 or any later version
 ## (c) 2016 Jeremy Darot
 ## jeremy@greenerleith.org
 
@@ -67,17 +67,17 @@ observeEvent(input$login_button, {
           login_attempts <<- login_attempts + 1
         }
         else { 
-          login_state <- TRUE
-          login_name <- input$login_name
-          output$login_message_name <- renderUI(HTML(paste(sep = "", "Logged in as: <b>", login_name, "</b>")))
+          login_state <<- TRUE
+          login_name <<- input$login_name
+          output$login_message_name <- renderUI(HTML(paste(sep = "", "<span style='color:green'>Logged in as: <b>", login_name, "</b></span>")))
           output$login_message_password <- renderUI(HTML("password:"))
         }
       }
     }})
 
 observeEvent(input$logout_button, {
-  login_state <- FALSE
-  login_name <- ""
+  login_state <<- FALSE
+  login_name <<- ""
   output$login_message_name <- renderUI(HTML("user name:"))
   if (login_attempts  < 3)
     output$login_message_password <- renderUI(HTML("password:"))
@@ -101,9 +101,9 @@ observeEvent(input$register_button, {
                     }) 
                   else {
                     users$insert(data.frame(name = login_name_hash, password = encrypt_password(encryption_algorithm)(input$login_password)))
-                    login_name_hash <- NULL
-                    login_state <- TRUE
-                    login_name <- input$login_name
+                    login_name_hash <<- NULL
+                    login_state <<- TRUE
+                    login_name <<- input$login_name
                     output$login_message_name <- renderUI(HTML(paste(sep = "", "Logged in as: <b>", login_name, "</b>")))
                     output$login_message_password <- renderUI(HTML("password:"))
                     registrations <<- registrations + 1

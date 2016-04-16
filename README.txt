@@ -4,5 +4,5 @@ More information on the app can be found at https://myleith.wordpress.com/.
 
 The author can be contacted at jeremy@greenerleith.org.
 
-MIT license
+GNU General Public License version 2 or any later version
 Copyright (c) 2016 Jeremy Darot

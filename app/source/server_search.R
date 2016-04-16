@@ -1,6 +1,6 @@
 ## server_search.R: address search
 
-## MIT License
+## GNU General Public License version 2 or any later version
 ## (c) 2016 Jeremy Darot
 ## jeremy@greenerleith.org
 

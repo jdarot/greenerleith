@@ -1,6 +1,6 @@
 ## server.R: app server-side scripting
 
-## MIT License
+## GNU General Public License version 2 or any later version
 ## (c) 2016 Jeremy Darot
 ## jeremy@greenerleith.org
 
@@ -74,5 +74,8 @@ shinyServer(function(input, output, session) {
     
   # Administrative boundaries (and associated data where available)
   source("./source/server_admin.R", local = TRUE) 
+  
+  # Green Leith thousand trees for Leith project
+  source("./source/server_trees.R", local = TRUE) 
   
 })

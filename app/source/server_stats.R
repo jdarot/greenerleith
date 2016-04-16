@@ -1,6 +1,6 @@
 ## server_stats.R: local statistics: Census, SIMD etc.
 
-## MIT License
+## GNU General Public License version 2 or any later version
 ## (c) 2016 Jeremy Darot
 ## jeremy@greenerleith.org
 

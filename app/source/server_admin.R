@@ -1,6 +1,6 @@
 ## server_admin.R:  administrative boundaries (and associated data where available)
 
-## MIT License
+## GNU General Public License version 2 or any later version
 ## (c) 2016 Jeremy Darot
 ## jeremy@greenerleith.org
 

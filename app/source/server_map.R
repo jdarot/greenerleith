@@ -1,6 +1,6 @@
 # server_map.R: map including initialisation, background and highlighting
 
-## MIT License
+## GNU General Public License version 2 or any later version
 ## (c) 2016 Jeremy Darot
 ## jeremy@greenerleith.org
 

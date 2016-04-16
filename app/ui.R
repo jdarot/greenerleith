@@ -1,6 +1,6 @@
 ## ui.R: app user interface
 
-## MIT License
+## GNU General Public License version 2 or any later version
 ## (c) 2016 Jeremy Darot
 ## jeremy@greenerleith.org
 
@@ -25,7 +25,7 @@ fluidPage(includeCSS("./www/app.css"),
   # Authentication - comment out if not enabled
   #######################################################   
 
-  absolutePanel(top = 445, left = 0, draggable = TRUE, class = "controls_autowidth",
+  absolutePanel(top = 450, left = 0, draggable = TRUE, class = "controls_autowidth",
    checkboxInput("show_panel_auth", strong("Log in (optional)"), FALSE, width = "100%"),
    uiOutput("panel_auth")
   ),
@@ -78,6 +78,11 @@ fluidPage(includeCSS("./www/app.css"),
   absolutePanel(top = 400, left = 0, draggable = TRUE, class = "controls_autowidth",
     checkboxInput("show_panel_osm", strong("OpenStreetMap data"), FALSE, width = "100%"),
     uiOutput("panel_osm")
+  ),
+  
+  absolutePanel(top = 500, left = 0, draggable = TRUE, class = "controls_autowidth",
+    checkboxInput("show_panel_trees", strong("1000 Trees for Leith"), FALSE, width = "100%"),
+    uiOutput("panel_trees")
   ),
   
   absolutePanel(top = 2, left = 60, width = 140, draggable = TRUE,

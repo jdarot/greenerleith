@@ -1,6 +1,6 @@
 ## server_global.R: global functions and constants
 
-## MIT License
+## GNU General Public License version 2 or any later version
 ## (c) 2016 Jeremy Darot
 ## jeremy@greenerleith.org
 
@@ -33,39 +33,49 @@ replace_synonyms <- function(input_string, original, converted) {
     else return(input_string)
 }
 
+
 # Function to generate an OSM Overpass query
 osm_query <- function(search_term, search_type, search_object) {
   if(search_object == "node")
-    query <- paste(sep = "", 
-                   "[out:xml];
-                   area[name='City of Edinburgh'];
-                   node(area)[", search_type, "=", search_term ,"];
-                   out;")
-  
-  else if(search_object == "way") 
-    query <- paste(sep = "", 
-                   "[out:xml];
-                   area[name='City of Edinburgh'];
-                   way(area)[", search_type, "=", search_term ,"];
-                   (._;>;);
-                   out;")
-  
-  else if(search_object == "both")
-    query <- paste(sep = "", 
-                   "[out:xml];
-                   area[name='City of Edinburgh'];
+    query <- paste(sep = "",
+                   "[out:xml][timeout:25];
+                   area[name='City of Edinburgh']->.searchArea;
                    (
-                   node(area)[", search_type, "=", search_term ,"];
-                   way(area)[", search_type, "=", search_term ,"];
-                   >;
+                   node[", search_type, "='", search_term ,"'](area.searchArea);
                    );
                    out;")
+
+  else if(search_object == "way")
+    query <- paste(sep = "",
+                   "[out:xml][timeout:25];
+                   area[name='City of Edinburgh']->.searchArea;
+                   (
+                   way[", search_type, "='", search_term ,"'](area.searchArea);
+                   );
+                   out body;
+                   >;
+                   out skel qt;")
+
+  else if(search_object == "both")
+    query <- paste(sep = "",
+                   "[out:xml][timeout:25];
+                   area[name='City of Edinburgh']->.searchArea;
+                   (
+                   node[", search_type, "='", search_term ,"'](area.searchArea);
+                   way[", search_type, "='", search_term ,"'](area.searchArea);
+                   );
+                   out body;
+                   >;
+                   out skel qt;")
+
   else query <- ""
   return(query)
 }
 
-# Function to create icon for RSS feeds
+# Function to create icons
 news_icon <- makeIcon(iconUrl = "RSS.png")
+green_tree_icon <- makeIcon(iconUrl = "green_tree.png", iconAnchorX = 16, iconAnchorY = 32)
+red_tree_icon <- makeIcon(iconUrl = "red_tree.png", iconAnchorX = 16, iconAnchorY = 32)
 
 # Some pre-defined categories and palettes
 
@@ -84,6 +94,4 @@ dz_2001_palette <- colorFactor(palette = "Blues", boundaries_dz_2001$ZONECODE)
 dz_2001_SIMD_palette <- colorNumeric(palette = "RdYlGn", domain = c(1, 6505))
 dz_2011_density_scotland_palette <- colorNumeric(palette = "RdYlGn", domain = -c(boundaries_dz_2011$pop_density_min[1], boundaries_dz_2011$pop_density_max[1]))
 dz_2011_density_edinburgh_palette <- colorNumeric(palette = "RdYlGn", domain = -boundaries_dz_2011$pop_density)
-
-
 
