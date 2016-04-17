@@ -8,6 +8,7 @@ output$osm_message <- renderUI(HTML("Enter a search term below"))
 
 node_results <- 0
 way_results <- 0
+results_displayed <- 0
 
 output$panel_osm <- renderUI({
   if(!(input$show_panel_osm))
@@ -29,6 +30,7 @@ observeEvent(input$osm_search_button, {
     # For some reason the message below isn't rendered
     output$osm_message <- renderUI(HTML("Searching..."))
     
+    try({
     input$osm_search_term %>%
       str_trim() %>%
       str_replace_all(" ", "_") %>%
@@ -38,10 +40,13 @@ observeEvent(input$osm_search_button, {
       replace_synonyms(synonyms_original, synonyms_converted) -> query_string
     query_string %>% osm_query(input$osm_search_type, "node") %>%
       overpass_query() -> osm_node
+    })
     
+    try({
     query_string %>% osm_query(input$osm_search_type, "way") %>%
       overpass_query() -> osm_way
-    
+    })
+      
     if((is.null(osm_node) || nrow(osm_node) == 0)&&(is.null(osm_way) || nrow(osm_way) == 0))
       output$osm_message <- renderUI(HTML("<span style='color:red'><b>No data found</b></span>")) 
     else {
@@ -73,29 +78,32 @@ observeEvent(input$osm_search_button, {
         current_group <- "osm"    
         proxy <- leafletProxy("mymap")
         
-        proxy %>% clearGroup(current_group) 
+        #proxy %>% clearGroup(current_group) 
         
-        if(!is.null(osm_node) && (nrow(osm_node) > 0))
+        results_displayed <<- results_displayed + 1
+        
+        if(exists("osm_node") && !is.null(osm_node) && (nrow(osm_node) > 0))
           proxy %>% addCircleMarkers(data = osm_node,
                                      lng = ~lon,
                                      lat = ~lat,
                                      popup = ~popup,
                                      radius = 5,
-                                     col = "purple",
+                                     col = osm_palette[results_displayed %% length(osm_palette)],
                                      opacity = 0.95,
                                      fillOpacity = 0.2,
                                      group = current_group)
         
-        if(!is.null(osm_way) && (nrow(osm_way) > 0))
+        if(exists("osm_way") && !is.null(osm_way) && (nrow(osm_way) > 0))
           proxy %>% addPolygons(data = osm_way,
                                 popup = ~popup,
-                                col = "purple",
+                                col = osm_palette[results_displayed %% length(osm_palette)],
                                 weight = 4,
                                 opacity = 0.95,
                                 fillOpacity = 0.2,
                                 group = current_group)
         
         output$osm_message <- renderUI(HTML(paste("Found: ", node_results, " points, ", way_results, " shapes.", sep = "")))
+        
       }}
   }
 })
@@ -104,4 +112,5 @@ observeEvent(input$osm_clear_button, {
   proxy <- leafletProxy("mymap")
   proxy %>% clearGroup("osm")
   output$osm_message <- renderUI(HTML("Enter a search term below"))
+  results_displayed <<- 0
 })

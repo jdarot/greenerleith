@@ -7,25 +7,6 @@
 
 # Air quality data is loaded for each user session, so that it is up to date (the source data is updated daily)
 
-loadData <- function(x) {
-  tryCatch({
-    fileName <- paste("http://uk-air.defra.gov.uk/openair/R_data/", x, ".RData", sep = "")
-    con <- url(fileName, method = "libcurl")
-    load(con)
-    
-    close(con)
-    
-    dat <- get(x)
-    
-    return(dat)
-  },
-  error = function(ex) {print(ex)})
-  
-}
-
-test <- loadData("ED3_2015")
-
-
 try(air <- importAURN(site = "ED3", year = 2015:2016, pollutant = c("pm10", "pm2.5", "o3", "no2", "wd", "ws")))
 if (exists("air")) {
   try(air_latest <- tail(air[(!is.na(air$o3)), ], 1))

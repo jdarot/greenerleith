@@ -95,3 +95,4 @@ dz_2001_SIMD_palette <- colorNumeric(palette = "RdYlGn", domain = c(1, 6505))
 dz_2011_density_scotland_palette <- colorNumeric(palette = "RdYlGn", domain = -c(boundaries_dz_2011$pop_density_min[1], boundaries_dz_2011$pop_density_max[1]))
 dz_2011_density_edinburgh_palette <- colorNumeric(palette = "RdYlGn", domain = -boundaries_dz_2011$pop_density)
 
+osm_palette <- c("purple", "blue", "red", "green", "pink", "black", "yellow", "gray")
