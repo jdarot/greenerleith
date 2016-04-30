@@ -25,10 +25,10 @@ fluidPage(includeCSS("./www/app.css"),
   # Authentication - comment out if not enabled
   #######################################################   
 
-  # absolutePanel(top = 450, left = 0, draggable = TRUE, class = "controls_autowidth",
-  #  checkboxInput("show_panel_auth", strong("Log in (optional)"), FALSE, width = "100%"),
-  #  uiOutput("panel_auth")
-  # ),
+  absolutePanel(top = 450, left = 0, draggable = TRUE, class = "controls_autowidth",
+   checkboxInput("show_panel_auth", strong("Log in (optional)"), FALSE, width = "100%"),
+   uiOutput("panel_auth")
+  ),
 
   ####################################################### 
   
@@ -80,11 +80,11 @@ fluidPage(includeCSS("./www/app.css"),
     uiOutput("panel_osm")
   ),
   
-  # absolutePanel(top = 500, left = 0, draggable = TRUE, class = "controls_autowidth",
-  #   checkboxInput("show_panel_trees", strong("1000 Trees for Leith"), FALSE, width = "100%"),
-  #   uiOutput("panel_trees")
-  # ),
-  
+  absolutePanel(top = 500, left = 0, draggable = TRUE, class = "controls_autowidth",
+    checkboxInput("show_panel_trees", strong("1000 Trees for Leith"), FALSE, width = "100%"),
+    uiOutput("panel_trees")
+  ),
+
   absolutePanel(top = 2, left = 60, width = 140, draggable = TRUE,
     htmlOutput("search_message"),
     textInput("search", label = NULL, width = "120px"),

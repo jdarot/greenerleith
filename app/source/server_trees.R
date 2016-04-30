@@ -6,6 +6,8 @@
 
 trees <- forest$find()
 
+makeReactiveBinding("login_state")
+
 is_marker_selected <- reactive({
   if(is.null(input$mymap_marker_click))
     return(FALSE) else return(TRUE)
@@ -28,8 +30,8 @@ output$panel_trees <- renderUI({
     return()
   if (login_state) {
     list(
-      checkboxInput("show_my_trees", label = "Show my trees", width = "100%"),
-      checkboxInput("show_other_trees", label = "Show other trees", width = "100%"),
+      checkboxInput("show_my_trees", label = "Show my trees", value = TRUE, width = "100%"),
+      checkboxInput("show_other_trees", label = "Show other trees", value = TRUE, width = "100%"),
       radioButtons("tree_edit_mode", label = "Edit mode", choices = c("read only", "add tree", "delete tree"), width = "100%")
     )
   } else {"Please log in first"}
@@ -40,12 +42,12 @@ observe({
   proxy <- leafletProxy("mymap")
   current_group <- "my_trees"
   
-  if(is.null(input$show_my_trees)) {
+  if((is.null(input$show_my_trees) || !login_state)) {
     proxy %>% clearGroup(current_group)
     return()
   }
   
-  if(input$show_my_trees) {
+  if(input$show_my_trees && login_state) {
     if(nrow(trees) > 0) {
       proxy %>% addMarkers(data = filter(trees, user_name == hash_user_name(login_name)), 
                            lat = ~lat,
@@ -68,12 +70,12 @@ observe({
   proxy <- leafletProxy("mymap")
   current_group <- "other_trees"
   
-  if(is.null(input$show_other_trees)) {
+  if(is.null(input$show_other_trees) || !login_state) {
     proxy %>% clearGroup(current_group)
     return()
   }
   
-  if(input$show_other_trees) {
+  if(input$show_other_trees && login_state) {
     if(nrow(trees) > 0) {
       proxy %>% addMarkers(data = filter(trees, user_name != hash_user_name(login_name)), 
                            lat = ~lat,
@@ -92,7 +94,7 @@ observe({
 
 observeEvent(input$mymap_click, {
   
-  if(input$show_panel_trees) {
+  if(input$show_panel_trees && login_state) {
     if(input$tree_edit_mode == "add tree") {
       click <- input$mymap_click
       
@@ -120,7 +122,7 @@ observeEvent(input$mymap_click, {
 
 observeEvent(input$mymap_marker_click, {
   
-  if(input$show_panel_trees) {
+  if(input$show_panel_trees && login_state) {
     if(input$tree_edit_mode == "delete tree") {
       if((selected_marker_group() == "my_trees")) {
         

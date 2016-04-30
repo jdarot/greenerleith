@@ -25,7 +25,7 @@ load(file = "./data/payload.RData")
 # Global functions and constants
 source("./source/server_global.R", local = TRUE)
 
-authentication_enabled <- FALSE
+authentication_enabled <- TRUE
 
 # Authentication setup
 if (authentication_enabled) {

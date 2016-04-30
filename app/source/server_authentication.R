@@ -66,7 +66,8 @@ observeEvent(input$login_button, {
           output$login_message_password <- renderUI(HTML("<span style='color:red'><b>Incorrect password</b></span>"))
           login_attempts <<- login_attempts + 1
         }
-        else { 
+        else {
+          if(login_state) login_state <<- FALSE
           login_state <<- TRUE
           login_name <<- input$login_name
           output$login_message_name <- renderUI(HTML(paste(sep = "", "<span style='color:green'>Logged in as: <b>", login_name, "</b></span>")))
