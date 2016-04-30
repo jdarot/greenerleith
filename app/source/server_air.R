@@ -4,18 +4,17 @@
 ## (c) 2016 Jeremy Darot
 ## jeremy@greenerleith.org
 
-
 # Air quality data is loaded for each user session, so that it is up to date (the source data is updated daily)
 
 try(air <- importAURN(site = "ED3", year = 2015:2016, pollutant = c("pm10", "pm2.5", "o3", "no2", "wd", "ws")))
-if (exists("air")) {
+if (exists("air") && !is.null(air) && (nrow(air) > 0)) {
   try(air_latest <- tail(air[(!is.na(air$o3)), ], 1))
 }
 
 output$panel_air <- renderUI({
   if(!(input$show_panel_air))
     return()
-  if(exists("air") && !is.null(air)) {
+  if(exists("air") && !is.null(air) && (nrow(air) > 0)) {
     list(
       radioButtons("pollutant", label = NULL,
                    choices = list("NO2" = "no2", "Ozone" = "o3", "PM10" = "pm10","PM2.5" = "pm2.5"), selected = "no2"),
@@ -26,7 +25,7 @@ output$panel_air <- renderUI({
 })
 
 output$panel_air_plot <- renderUI({
-  if(!(input$show_panel_air) || !exists("air") || is.null(air))
+  if(!(input$show_panel_air) || !exists("air") || is.null(air) || (nrow(air) == 0))
     return()
   list(plotOutput("air_plot", width = 500, height = 400))
 })
@@ -37,7 +36,7 @@ observe({
     proxy %>% clearGroup("air")
     return()
   }
-  if(is.null(input$pollutant) || is.null(input$air_plot_type) || !exists("air") || is.null(air) || !exists("air_latest") || is.null(air_latest))
+  if(is.null(input$pollutant) || is.null(input$air_plot_type) || !exists("air") || is.null(air) || !exists("air_latest") || is.null(air_latest) || (nrow(air_latest) == 0))
     return()
   # For now, we only show data for Edinburgh St Leonards station
   if(input$show_panel_air) {

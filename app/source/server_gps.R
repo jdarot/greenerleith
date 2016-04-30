@@ -376,6 +376,8 @@ output$panel_gps_plot <- renderUI({
 })
 
 output$gps_table <- DT::renderDataTable({
+  if(is.null(input$show_gps) || !("show_gps_plot" %in% input$show_gps) || !(selected_group() == "GPs") || is.null(selected_gp()))
+  return() 
   selected_code <- selected_gp()$`Practice Code`
   gps_doctors %>% filter(`Practice Code` == selected_code) %>% select(`Surname`, Forename, `Middle Initial`, Sex, `GMC Number`) %>% arrange(`Surname`)
   

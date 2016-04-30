@@ -83,37 +83,41 @@ observe({
   highlighted_data <- NULL
   if(is_selected()) {
     if(input$show_panel_gps) {
-      if((selected_group() == "catch primary")&&(selected_group() %in% input$show_catchment)) 
-        highlighted_data <- nondem_primary_areas[selected_index(),]
-      if((selected_group() == "catch secondary")&&(selected_group() %in% input$show_catchment))  
-        highlighted_data <- nondem_secondary_areas[selected_index(),]
-      if((selected_group() == "catch primary catholic")&&(selected_group() %in% input$show_catchment))  
-        highlighted_data <- cath_primary_areas[selected_index(),]
-      if((selected_group() == "catch secondary catholic")&&(selected_group() %in% input$show_catchment))  
-        highlighted_data <- cath_secondary_areas[selected_index(),]
+      if(selected_group() %in% input$show_catchment) {
+        if(selected_group() == "catch primary")
+          highlighted_data <- nondem_primary_areas[selected_index(),]
+        if(selected_group() == "catch secondary")  
+          highlighted_data <- nondem_secondary_areas[selected_index(),]
+        if(selected_group() == "catch primary catholic") 
+          highlighted_data <- cath_primary_areas[selected_index(),]
+        if(selected_group() == "catch secondary catholic")  
+          highlighted_data <- cath_secondary_areas[selected_index(),]
+      }
     }
     if(input$show_panel_admin) {
-      if((selected_group() == "pcs")&&(selected_group() %in% input$show_admin))  
-        highlighted_data <- boundaries_pcs[selected_index(),]
-      if((selected_group() == "unitary")&&(selected_group() %in% input$show_admin))  
-        highlighted_data <- boundaries_unitary[selected_index(),]
-      if((selected_group() == "const")&&(selected_group() %in% input$show_admin))  
-        highlighted_data <- boundaries_const[selected_index(),]
-      if((selected_group() == "ward")&&(selected_group() %in% input$show_admin)) 
-        highlighted_data <- boundaries_ward[selected_index(),]
-      if((selected_group() == "west")&&(selected_group() %in% input$show_admin)) 
-        highlighted_data <- boundaries_west[selected_index(),]
-      if((selected_group() == "ccs")&&(selected_group() %in% input$show_admin))  
-        highlighted_data <- boundaries_cc[selected_index(),]
-      if((selected_group() == "nns")&&(selected_group() %in% input$show_admin))  
-        highlighted_data <- boundaries_nn[selected_index(),]
-      if((selected_group() == "nps")&&(selected_group() %in% input$show_admin))  
-        highlighted_data <- boundaries_np[selected_index(),]
+      if(selected_group() %in% input$show_admin) {
+        if(selected_group() == "pcs")  
+          highlighted_data <- boundaries_pcs[selected_index(),]
+        if(selected_group() == "unitary")
+          highlighted_data <- boundaries_unitary[selected_index(),]
+        if(selected_group() == "const")
+          highlighted_data <- boundaries_const[selected_index(),]
+        if(selected_group() == "ward") 
+          highlighted_data <- boundaries_ward[selected_index(),]
+        if(selected_group() == "west") 
+          highlighted_data <- boundaries_west[selected_index(),]
+        if(selected_group() == "ccs")
+          highlighted_data <- boundaries_cc[selected_index(),]
+        if(selected_group() == "nns") 
+          highlighted_data <- boundaries_nn[selected_index(),]
+        if(selected_group() == "nps")
+          highlighted_data <- boundaries_np[selected_index(),]
+      }
     }
     if(input$show_panel_stats) {
-      if((selected_group() == "dz_2011")&&(selected_group() %in% input$show_stats))  
+      if(input$show_dz_2011 && (selected_group() == "dz_2011"))  
         highlighted_data <- boundaries_dz_2011[selected_index(),]
-      if((selected_group() == "dz_2001")&&(selected_group() %in% input$show_stats))  
+      if(input$show_dz_2001 && (selected_group() == "dz_2001"))  
         highlighted_data <- boundaries_dz_2001[selected_index(),]
     }
     if(!is.null(highlighted_data))

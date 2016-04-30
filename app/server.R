@@ -25,7 +25,7 @@ load(file = "./data/payload.RData")
 # Global functions and constants
 source("./source/server_global.R", local = TRUE)
 
-authentication_enabled <- TRUE
+authentication_enabled <- FALSE
 
 # Authentication setup
 if (authentication_enabled) {
@@ -76,6 +76,7 @@ shinyServer(function(input, output, session) {
   source("./source/server_admin.R", local = TRUE) 
   
   # Green Leith thousand trees for Leith project
-  source("./source/server_trees.R", local = TRUE) 
+  if (authentication_enabled)
+    source("./source/server_trees.R", local = TRUE) 
   
 })

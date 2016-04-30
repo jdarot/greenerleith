@@ -47,7 +47,7 @@ observeEvent(input$osm_search_button, {
       overpass_query() -> osm_way
     })
       
-    if((is.null(osm_node) || nrow(osm_node) == 0)&&(is.null(osm_way) || nrow(osm_way) == 0))
+    if((is.null(osm_node) || (nrow(osm_node) == 0)) && (is.null(osm_way) || (nrow(osm_way) == 0)))
       output$osm_message <- renderUI(HTML("<span style='color:red'><b>No data found</b></span>")) 
     else {
       
