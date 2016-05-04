@@ -40,7 +40,8 @@ output$login_message_name <- renderUI(HTML("user name:"))
 output$login_message_password <- renderUI(HTML("password:"))
 
 output$panel_auth <- renderUI({
-  if(!(input$show_panel_auth))
+  #if(!(input$show_panel_auth))
+  if(login_state)
     return()
   list(
     htmlOutput("login_message_name"),

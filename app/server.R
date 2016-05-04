@@ -49,31 +49,31 @@ shinyServer(function(input, output, session) {
   source("./source/server_search.R", local = TRUE)
   
   # Air quality data
-  source("./source/server_air.R", local = TRUE) 
+  # source("./source/server_air.R", local = TRUE) 
 
   # News stories
-  source("./source/server_news.R", local = TRUE) 
+  # source("./source/server_news.R", local = TRUE) 
   
   # OpenStreetMap data
-  source("./source/server_osm.R", local = TRUE) 
+  # source("./source/server_osm.R", local = TRUE) 
 
   # Planning projects
-  source("./source/server_projects.R", local = TRUE) 
+  # source("./source/server_projects.R", local = TRUE) 
   
   # Planning framework
-  source("./source/server_planning.R", local = TRUE) 
+  # source("./source/server_planning.R", local = TRUE) 
   
   # GPs, care and schools
-  source("./source/server_gps.R", local = TRUE) 
+  # source("./source/server_gps.R", local = TRUE) 
   
   # Local statistics: Census, SIMD etc.
-  source("./source/server_stats.R", local = TRUE) 
+  # source("./source/server_stats.R", local = TRUE) 
   
   # Amenities: allotments, recycling
-  source("./source/server_amenities.R", local = TRUE) 
+  # source("./source/server_amenities.R", local = TRUE) 
     
   # Administrative boundaries (and associated data where available)
-  source("./source/server_admin.R", local = TRUE) 
+  # source("./source/server_admin.R", local = TRUE) 
   
   # Green Leith thousand trees for Leith project
   if (authentication_enabled)

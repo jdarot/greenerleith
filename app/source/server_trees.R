@@ -26,15 +26,16 @@ selected_marker_index <- reactive({
 })
 
 output$panel_trees <- renderUI({
-  if(!(input$show_panel_trees))
-    return()
+  #if(!(input$show_panel_trees) && !login_state)
+  #  return()
   if (login_state) {
     list(
       checkboxInput("show_my_trees", label = "Show my trees", value = TRUE, width = "100%"),
       checkboxInput("show_other_trees", label = "Show other trees", value = TRUE, width = "100%"),
       radioButtons("tree_edit_mode", label = "Edit mode", choices = c("read only", "add tree", "delete tree"), width = "100%")
     )
-  } else {"Please log in first"}
+  #} else {"Please log in first"}
+  } else return()
 })  
 
 observe({
@@ -94,7 +95,8 @@ observe({
 
 observeEvent(input$mymap_click, {
   
-  if(input$show_panel_trees && login_state) {
+  #if(input$show_panel_trees && login_state) {
+  if(login_state) {
     if(input$tree_edit_mode == "add tree") {
       click <- input$mymap_click
       
@@ -122,7 +124,8 @@ observeEvent(input$mymap_click, {
 
 observeEvent(input$mymap_marker_click, {
   
-  if(input$show_panel_trees && login_state) {
+  #if(input$show_panel_trees && login_state) {
+  if(login_state) {
     if(input$tree_edit_mode == "delete tree") {
       if((selected_marker_group() == "my_trees")) {
         
