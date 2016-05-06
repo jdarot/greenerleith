@@ -51,7 +51,7 @@ output$panel_auth <- renderUI({
     actionButton("login_button", strong("log in"), style="padding:6px; font-size:12.5px;width:57px"),
     actionButton("logout_button", strong("log out"), style="padding:6px; font-size:12.5px;width:57px"),
     actionButton("register_button", strong("register"), style="padding:6px; font-size:12.5px;width:57px"),
-    HTML("<br><br><b>Disclaimer:</b> when registering, please<br>do <b>not</b> use your real name, or re-use<br>one of your existing passwords.<br><br>Your user name and password will<br> be transmitted and stored in an<br>encrypted form, but no guarantee<br>of security is given here.")
+    HTML("<br><br><b>Privacy notice:</b> when registering, please do<br><b>not</b> re-use one of your existing passwords.<br>Your user name and password will be<br>transmitted and stored in an encrypted<br>form, and Greener Leith will not know what<br>they are. However, we cannot provide<br>an absolute guarantee of security.")
   )
 })
 

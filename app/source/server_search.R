@@ -7,8 +7,10 @@
 output$search_message <- renderUI(HTML("Enter address below"))
 
 observeEvent(input$search_button, {
+  
+  if(!str_detect(input$search, fixed("Edinburgh", ignore_case = TRUE)) && !((str_to_upper(str_sub(input$search, 1, 2)) == "EH") && (str_length(str_replace_all(input$search, " ", "")) %in% c(6, 7))) ) suffix <- ", Edinburgh" else suffix <- ""
   # Use Google API for address search
-  location <- geocode(input$search, source = "google")
+  location <- geocode(paste(input$search, suffix, sep = ""), source = "google")
   # Do not show addresses beyond the LDP boundaries
   if ((!is.na(location$lat)) && (location$lat < max_lat) && (location$lat > min_lat) && (!is.na(location$lon)) && (location$lon < max_lon) && (location$lon > min_lon)) {
     proxy <- leafletProxy("mymap")
