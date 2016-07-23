@@ -47,11 +47,11 @@ observeEvent(input$osm_search_button, {
       overpass_query() -> osm_way
     })
       
-    if((is.null(osm_node) || (nrow(osm_node) == 0)) && (is.null(osm_way) || (nrow(osm_way) == 0)))
+    if((!exists("osm_node") || is.null(osm_node) || (nrow(osm_node) == 0)) && (!exists("osm_way") || is.null(osm_way) || (nrow(osm_way) == 0)))
       output$osm_message <- renderUI(HTML("<span style='color:red'><b>No data found</b></span>")) 
     else {
       
-      if(!is.null(osm_node) && (nrow(osm_node) > 0)) {
+      if(exists("osm_node") && !is.null(osm_node) && (nrow(osm_node) > 0)) {
         
         node_results <- nrow(osm_node)
         
@@ -61,7 +61,7 @@ observeEvent(input$osm_search_button, {
           osm_node@data$popup <- paste(sep = "", osm_node@data$popup, ifelse(is.na(osm_node@data[,osm_name]), "", paste("<b>", osm_name, ":</b> ", osm_node@data[,osm_name], "<br>")))
         }
         
-        if(!is.null(osm_way) && (nrow(osm_way) > 0)) {
+        if(exists("osm_way") && !is.null(osm_way) && (nrow(osm_way) > 0)) {
           
           way_results <- nrow(osm_way)
           

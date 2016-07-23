@@ -25,65 +25,65 @@ fluidPage(includeCSS("./www/app.css"),
   # Authentication - comment out if not enabled
   #######################################################   
 
-  absolutePanel(top = 0, left = 195, draggable = TRUE, class = "controls_autowidth-red",
-   #checkboxInput("show_panel_auth", strong("Log in"), FALSE, width = "100%"),
-   uiOutput("panel_auth")
-  ),
+  # absolutePanel(top = 0, left = 195, draggable = TRUE, class = "controls_autowidth-red",
+  #  #checkboxInput("show_panel_auth", strong("Log in"), FALSE, width = "100%"),
+  #  uiOutput("panel_auth")
+  # ),
 
   ####################################################### 
   
-  # absolutePanel(top = 0, right = 175, width = 175, draggable = TRUE, class = "controls",  
-  #   checkboxInput("show_panel_projects", strong("Planning projects"), FALSE),    
-  #   uiOutput("panel_projects")            
-  # ),
-  #         
-  # absolutePanel(top = 0, right = 0, width = 175, draggable = TRUE, class = "controls",
-  #   checkboxInput("show_panel_planning", strong("Planning framework"), FALSE),            
-  #   uiOutput("panel_planning")
-  # ),
-  # 
-  # absolutePanel(top = 0, right = 350, width = 160, draggable = TRUE, class = "controls",  
-  #   checkboxInput("show_panel_air", strong("Air quality"), FALSE),
-  #   uiOutput("panel_air")
-  # ),
-  # 
-  # absolutePanel(top = 0, left = 0, draggable = TRUE, id = "panel_air_plot",
-  #   uiOutput("panel_air_plot")
-  # ),
-  # 
-  # absolutePanel(top = 0, right = 510, width = 170, draggable = TRUE, class = "controls",  
-  #   checkboxInput("show_panel_gps", strong("GPs, care & schools"), FALSE),    
-  #   uiOutput("panel_gps")            
-  # ),
-  # 
-  # absolutePanel(top = 0, left = 0, draggable = TRUE, id = "panel_gps_plot",
-  #   uiOutput("panel_gps_plot")
-  # ),
-  # 
-  # absolutePanel(top = 45, right = 0, width = 175, draggable = TRUE, class = "controls",
-  #   checkboxInput("show_panel_stats", strong("Local statistics"), FALSE),
-  #   uiOutput("panel_stats")            
-  # ),
-  # 
-  # absolutePanel(top = 45, right = 175, width = 175, draggable = TRUE, class = "controls",
-  #   checkboxInput("show_panel_news", strong("Local news"), FALSE),
-  #   uiOutput("panel_news")            
-  # ),
-  # 
-  # absolutePanel(top = 45, right = 350, width = 160, draggable = TRUE, class = "controls",
-  #   checkboxInput("show_panel_amenities", strong("Allotments & recycling"), FALSE),
-  #   uiOutput("panel_amenities")            
-  # ),
-  # 
+  absolutePanel(top = 0, right = 175, width = 175, draggable = TRUE, class = "controls",
+    checkboxInput("show_panel_projects", strong("Planning projects"), FALSE),
+    uiOutput("panel_projects")
+  ),
+
+  absolutePanel(top = 0, right = 0, width = 175, draggable = TRUE, class = "controls",
+    checkboxInput("show_panel_planning", strong("Planning framework"), FALSE),
+    uiOutput("panel_planning")
+  ),
+
+  absolutePanel(top = 0, right = 350, width = 160, draggable = TRUE, class = "controls",
+    checkboxInput("show_panel_air", strong("Air quality"), FALSE),
+    uiOutput("panel_air")
+  ),
+
+  absolutePanel(top = 0, left = 0, draggable = TRUE, id = "panel_air_plot",
+    uiOutput("panel_air_plot")
+  ),
+
+  absolutePanel(top = 0, right = 510, width = 170, draggable = TRUE, class = "controls",
+    checkboxInput("show_panel_gps", strong("GPs, care & schools"), FALSE),
+    uiOutput("panel_gps")
+  ),
+
+  absolutePanel(top = 0, left = 0, draggable = TRUE, id = "panel_gps_plot",
+    uiOutput("panel_gps_plot")
+  ),
+
+  absolutePanel(top = 45, right = 0, width = 175, draggable = TRUE, class = "controls",
+    checkboxInput("show_panel_stats", strong("Local statistics"), FALSE),
+    uiOutput("panel_stats")
+  ),
+
+  absolutePanel(top = 45, right = 175, width = 175, draggable = TRUE, class = "controls",
+    checkboxInput("show_panel_news", strong("Local news"), FALSE),
+    uiOutput("panel_news")
+  ),
+
+  absolutePanel(top = 45, right = 350, width = 160, draggable = TRUE, class = "controls",
+    checkboxInput("show_panel_amenities", strong("Allotments & recycling"), FALSE),
+    uiOutput("panel_amenities")
+  ),
+
   # absolutePanel(top = 400, left = 0, draggable = TRUE, class = "controls_autowidth",
   #   checkboxInput("show_panel_osm", strong("OpenStreetMap data"), FALSE, width = "100%"),
   #   uiOutput("panel_osm")
   # ),
-  
-  absolutePanel(top = 0, left = 420, draggable = TRUE, class = "controls_autowidth-green",
-    #checkboxInput("show_panel_trees", strong("1000 Trees for Leith"), FALSE, width = "100%"),
-    uiOutput("panel_trees")
-  ),
+
+  # absolutePanel(top = 0, left = 420, draggable = TRUE, class = "controls_autowidth-green",
+  #   ##checkboxInput("show_panel_trees", strong("1000 Trees for Leith"), FALSE, width = "100%"),
+  #   uiOutput("panel_trees")
+  # ),
 
   absolutePanel(top = 2, left = 60, width = 140, draggable = TRUE,
     htmlOutput("search_message"),
@@ -97,10 +97,11 @@ fluidPage(includeCSS("./www/app.css"),
     checkboxInput("retina", strong("Hi-resolution"), FALSE)
   ),
   
-  # absolutePanel(top = 310, left = 0, draggable = TRUE, class = "controls_autowidth",  
-  #   checkboxInput("show_panel_admin", strong("Boundaries"), FALSE, width = "100%"),            
-  #   uiOutput("panel_admin")            
-  # ),
+  # Note: boundaries need to be commented out for the 1000 trees project to prevent them crashing the app
+  absolutePanel(top = 310, left = 0, draggable = TRUE, class = "controls_autowidth",
+    checkboxInput("show_panel_admin", strong("Boundaries"), FALSE, width = "100%"),
+    uiOutput("panel_admin")
+  ),
           
   absolutePanel(bottom = 0, left = 0, height = 105, draggable = TRUE, id = "credits",
     "Provided by",
